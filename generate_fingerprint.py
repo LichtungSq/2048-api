@@ -1,6 +1,7 @@
 import json
 import numpy as np
 from game2048.game import Game
+from game2048.displays import Display
 
 
 def generate_fingerprint(AgentClass, **kwargs):
@@ -24,9 +25,14 @@ if __name__ == '__main__':
 
     '''====================
     Use your own agent here.'''
-    from game2048.agents import ExpectiMaxAgent as TestAgent
+    from game2048.agents import ExpectiMaxAgent
+    game = Game(4, score_to_win=2048, random=True)
+    display2 = Display()
+    display2.display(game)
+    TestAgent = ExpectiMaxAgent(game, display=display2)
+    TestAgent.play(verbose=True)
     '''===================='''
-
+    
     fingerprint = generate_fingerprint(TestAgent)
 
     with open("EE369_fingerprint.json", 'w') as f:        

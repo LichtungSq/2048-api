@@ -4,7 +4,7 @@ from game2048.displays import Display
 
 def single_run(size, score_to_win, AgentClass, **kwargs):
     game = Game(size, score_to_win)
-    agent = AgentClass(game, display=Display(), **kwargs)
+    agent = AgentClass(game, display = Display(), **kwargs)
     agent.play(verbose=True)
     return game.score
 

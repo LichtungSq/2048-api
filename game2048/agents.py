@@ -1,10 +1,11 @@
 import numpy as np
-
+from game2048.displays import Display
 
 class Agent:
     '''Agent Base.'''
 
-    def __init__(self, game, display=None):
+    def __init__(self, game, display):
+        #display = Display()
         self.game = game
         self.display = display
 
@@ -35,7 +36,8 @@ class RandomAgent(Agent):
 
 class ExpectiMaxAgent(Agent):
 
-    def __init__(self, game, display=None):
+    def __init__(self, game, display):
+        # display = Display()
         if game.size != 4:
             raise ValueError(
                 "`%s` can only work with game of `size` 4." % self.__class__.__name__)
