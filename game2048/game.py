@@ -7,7 +7,6 @@ class Game:
 
     def __init__(self, size=4, score_to_win=None, rate_2=0.5, random=False, enable_rewrite_board=False):
         '''
-
         :param size: the size of the board
         :param score_to_win: the terminate score to indicate `win`
         :param rate_2: the probability of the next element to be 2 (otherwise 4)

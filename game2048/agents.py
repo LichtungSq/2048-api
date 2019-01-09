@@ -1,5 +1,6 @@
 import numpy as np
-# from game2048.displays import Display
+from .displays import Display
+# from keras.utils import load_model
 
 class Agent:
     '''Agent Base.'''
@@ -48,3 +49,17 @@ class ExpectiMaxAgent(Agent):
     def step(self):
         direction = self.search_func(self.game.board)
         return direction
+
+class MyOwnAgent(Agent):
+    
+    def __init__(self,game,display = None):
+        self.model = load_model("my_model.h5")
+
+    def step(self,game):
+        direction = int(self.model.predict(game.board).argmax())
+        return direction
+
+# print(self.game.board)
+# self.trainData.append(grid_ohe(self.game.board))
+# self.trainLabel.append(direction_table[direction])
+# TTAINDATA.append(grid_ohe(self.game.board))
