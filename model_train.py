@@ -2,6 +2,7 @@ from game2048.game import Game
 from game2048.expectimax import board_to_move
 import numpy as np
 import keras
+from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 
 def grid_ohe(arr):
     ret = np.zeros(shape = OUT_SHAPE + (CAND,), dtype = int)
@@ -94,18 +95,21 @@ class Model:
 
 
 model = Model()
-mw = ModelWrapper(model,2**16)
+task = ModelWrapper(model,2**16)
 batch = 2048
+count = 0
 
 while True:
     game = Game()
+
     while not game.end:
-        mw.move(game)
-    mw.train(batch = batch)
-    if :
-        model.save("dfd")
-    if 1000:
-        model.save()
+        task.move(game)
+    task.train(batch = batch)
+    count += 1
+    if count < 1000:
+        model.save("first")
+    if count >= 1000:
+        model.save("second")
         
 
 
