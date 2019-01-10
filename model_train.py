@@ -102,12 +102,12 @@ class MyModel:
     model.summary()
     model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accuracy'])
 
-# def train(self, begin_score, end_score):
-#    if os.path.exists("model_%d_%d.h5" % (begin_score, end_score)):
-#	print("model exists, and will be loaded.")
-#	self.model = load_model("model_%d_%d.h5" % (begin_score, end_score))
-#   else:
-#	self.model = self.build()
+def train(self, begin_score, end_score):
+    if os.path.exists("model_%d_%d.h5" % (begin_score, end_score)):
+	    print("model exists, and will be loaded.")
+	    self.model = load_model("model_%d_%d.h5" % (begin_score, end_score))
+    else:
+	    self.model = self.build()
 
 model = MyModel()
 task = ModelWrapper(model, 2**16)
@@ -116,13 +116,14 @@ count = 0
 
 while True:
     game = Game()
+
     while not game.end:
         task.move(game)
     task.train(batch = batch)
+
     model.save(filepath="model.h5", overwrite=True)
 
-#    count += 1
-#    if count < 1000:
-#    if count >= 1000:
-#        model.save("second.h5")
-
+    # count += 1
+    # if count < 1000:
+    # if count >= 1000:
+    # model.save("second.h5")
