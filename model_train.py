@@ -2,6 +2,7 @@ from game2048.game import Game
 from game2048.expectimax import board_to_move
 import numpy as np
 import random
+import os
 import keras
 from keras.models import *
 from keras.layers import *
@@ -113,7 +114,10 @@ def train(self, begin_score, end_score):
     else:
 	    self.model = self.build()
 
-model = My_Model()
+if os.path.exists("my_model.h5"):
+    model = load_model("my_model.h5")
+else:
+    model = My_Model()
 task = ModelWrapper(model, 2**16)
 batch = 2048
 count = 0
