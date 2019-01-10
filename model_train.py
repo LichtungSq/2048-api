@@ -2,7 +2,15 @@ from game2048.game import Game
 from game2048.expectimax import board_to_move
 import numpy as np
 import keras
-from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
+from keras.models import *
+from keras.layers import *
+# from keras.models import Sequential
+# from keras.layers import concatenate, Input, Dense, Dropout, Flatten, Conv2D, MaxPooling2D
+
+OUT_SHAPE = (4,4)
+CAND = 16
+map_table = {2**i: i for i in range(1,CAND)}
+map_table[0] = 0
 
 def grid_ohe(arr):
     ret = np.zeros(shape = OUT_SHAPE + (CAND,), dtype = int)
@@ -13,7 +21,7 @@ def grid_ohe(arr):
 
 class Guides:
 
-    def _init_(self,capacity):
+    def __init__(self,capacity):
         self.capacity = capacity
         self.memory = []
         self.position = 0
@@ -36,10 +44,10 @@ class Guides:
 
 class ModelWrapper:
     
-    def _init_(self,model,capacity):
+    def __init__(self,model,capacity):
         self.model = model
         self.memory = Guides(capacity)
-        self.writer = SummaryWriter()
+        # self.writer = SummaryWriter()
         self.training_step = 0
 
     def predict(self,board):
@@ -68,7 +76,7 @@ class ModelWrapper:
             print('acc',float(acc),self.training_step)
             self.training_step += 1
 
-class Model:
+class MyModel:
 
     inputs = Input((4,4,16))
 
@@ -81,6 +89,7 @@ class Model:
     conv44 = Conv2D(filters=FILTERS,kernel_size=(4,4),kernel_initializer ='he_uniform')(conv)
 
     hidden = concatenate([Flatten()(conv41),Flatten()(conv14),Flatten()(conv22),Flatten()(conv33),Flatten()(conv44)])
+
     x = BatchNormalization()(hidden)
     x = Activation('relu')(hidden)
 
@@ -93,23 +102,27 @@ class Model:
     model.summary()
     model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accuracy'])
 
+# def train(self, begin_score, end_score):
+#    if os.path.exists("model_%d_%d.h5" % (begin_score, end_score)):
+#	print("model exists, and will be loaded.")
+#	self.model = load_model("model_%d_%d.h5" % (begin_score, end_score))
+#   else:
+#	self.model = self.build()
 
-model = Model()
-task = ModelWrapper(model,2**16)
+model = MyModel()
+task = ModelWrapper(model, 2**16)
 batch = 2048
 count = 0
 
 while True:
     game = Game()
-
     while not game.end:
         task.move(game)
     task.train(batch = batch)
-    count += 1
-    if count < 1000:
-        model.save("first")
-    if count >= 1000:
-        model.save("second")
-        
+    model.save(filepath="model.h5", overwrite=True)
 
+#    count += 1
+#    if count < 1000:
+#    if count >= 1000:
+#        model.save("second.h5")
 
