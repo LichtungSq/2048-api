@@ -121,7 +121,7 @@ while True:
         task.move(game)
     task.train(batch = batch)
 
-    model.save(filepath="model.h5", overwrite=True)
+    model.save(filepath="my_model.h5", overwrite=True)
 
     # count += 1
     # if count < 1000:
