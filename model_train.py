@@ -39,7 +39,7 @@ class Guides:
         return random.sample(self.memory,batch_size)
 
     def ready(self,batch_size):
-        return len(self.memory) >= batch.size
+        return len(self.memory) >= batch_size
 
     def _len_(self):
         return len(self.memory)
