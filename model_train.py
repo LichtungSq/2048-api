@@ -1,6 +1,7 @@
 from game2048.game import Game
 from game2048.expectimax import board_to_move
 import numpy as np
+import random
 import keras
 from keras.models import *
 from keras.layers import *
