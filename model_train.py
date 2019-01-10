@@ -19,6 +19,8 @@ def grid_ohe(arr):
             ret[r,c,map_table[arr[r,c]]] = 1
     return ret
 
+Guide = namedtuple('Guide', ('state', 'action'))
+
 class Guides:
 
     def __init__(self,capacity):
