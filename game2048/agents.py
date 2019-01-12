@@ -57,10 +57,11 @@ class ExpectiMaxAgent(Agent):
 class MyOwnAgent(Agent):
     
     def __init__(self,game,display = None):
-        self.model = load_model("./my_model2_1.h5")
+        super().__init__(game, display)
+        self.model = load_model("./model_1300.h5")
 
     def step(self,game):
-        direction = int(self.model.predict(game.board).argmax())
+        direction = int(self.model.predict(self.game.board).argmax())
         return direction
 
 # print(self.game.board)
