@@ -1,5 +1,6 @@
 import numpy as np
 from .displays import Display
+from .game import Game
 import keras
 import os
 from keras.models import load_model
@@ -57,7 +58,7 @@ class ExpectiMaxAgent(Agent):
 class MyOwnAgent(Agent):
     
     def __init__(self,game,display = None):
-        super().__init__(game, display)
+        super(MyOwnAgent, self).__init__(game, display)
         self.model = load_model("./model_1300.h5")
 
     def step(self,game):

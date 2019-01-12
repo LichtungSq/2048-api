@@ -1,5 +1,7 @@
 from game2048.game import Game
 from game2048.displays import Display
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="1"
 
 def single_run(size, score_to_win, AgentClass, **kwargs):
     game = Game(size, score_to_win)

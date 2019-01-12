@@ -133,7 +133,7 @@ while True:
         model.save(filepath="model.h5", overwrite=True)
 
     if count % 100 == 0:
-        model.save(filepath="model_%d.h5" % count, overwrite=True)
+        model.save(filepath="model_100.h5", overwrite=True)
 
     # count += 1
     # if count < 1000:
