@@ -1,5 +1,9 @@
 import numpy as np
 from .displays import Display
+import keras
+import os
+from keras.models import load_model
+from keras.utils import np_utils
 # from keras.utils import load_model
 
 class Agent:
@@ -53,7 +57,7 @@ class ExpectiMaxAgent(Agent):
 class MyOwnAgent(Agent):
     
     def __init__(self,game,display = None):
-        self.model = load_model("my_model.h5")
+        self.model = load_model("./my_model2_1.h5")
 
     def step(self,game):
         direction = int(self.model.predict(game.board).argmax())

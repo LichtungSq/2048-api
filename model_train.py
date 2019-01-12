@@ -114,8 +114,8 @@ def train(self, begin_score, end_score):
     else:
 	    self.model = self.build()
 
-if os.path.exists("my_model.h5"):
-    model = load_model("my_model.h5")
+if os.path.exists("my_model2.h5"):
+    model = load_model("my_model2.h5")
 else:
     model = My_Model()
 task = ModelWrapper(model, 2**16)
@@ -129,7 +129,7 @@ while True:
         task.move(game)
     task.train(batch = batch)
 
-    model.save(filepath="my_model.h5", overwrite=True)
+    model.save(filepath="my_model2_1.h5", overwrite=True)
 
     # count += 1
     # if count < 1000:
