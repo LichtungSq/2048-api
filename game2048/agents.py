@@ -7,7 +7,19 @@ from keras.models import load_model
 from keras.utils import np_utils
 # from keras.utils import load_model
 
-class Agent:
+OUT_SHAPE = (4,4)
+CAND = 16
+map_table = {2**i: i for i in range(1,CAND)}
+map_table[0] = 0
+
+def grid_ohe(arr):
+    ret = np.zeros(shape = OUT_SHAPE + (CAND,), dtype = int)
+    for r in range(OUT_SHAPE[0]):
+        for c in range(OUT_SHAPE[1]):
+            ret[r,c,map_table[arr[r,c]]] = 1
+    return ret
+
+class Agent(object):
     '''Agent Base.'''
 
     def __init__(self, game, display=None):
@@ -39,7 +51,6 @@ class RandomAgent(Agent):
         direction = np.random.randint(0, 4)
         return direction
 
-
 class ExpectiMaxAgent(Agent):
 
     def __init__(self, game, display=None):
@@ -47,7 +58,7 @@ class ExpectiMaxAgent(Agent):
         if game.size != 4:
             raise ValueError(
                 "`%s` can only work with game of `size` 4." % self.__class__.__name__)
-        super().__init__(game, display)
+        super(ExpectiMaxAgent, self).__init__(game, display)
         from .expectimax import board_to_move
         self.search_func = board_to_move
 
@@ -57,12 +68,14 @@ class ExpectiMaxAgent(Agent):
 
 class MyOwnAgent(Agent):
     
-    def __init__(self,game,display = None):
+    def __init__(self, game,display = None):
         super(MyOwnAgent, self).__init__(game, display)
-        self.model = load_model("./model_1300.h5")
+        self.model = load_model("./test_model_1352.h5")
 
-    def step(self,game):
-        direction = int(self.model.predict(self.game.board).argmax())
+    def step(self):
+        board = np.array([grid_ohe(self.game.board)])
+        tmp = self.model.predict(board)
+        direction = int(tmp.argmax())
         return direction
 
 # print(self.game.board)

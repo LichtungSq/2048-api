@@ -63,7 +63,7 @@ class ModelWrapper:
         direction = self.predict(ohe_board).argmax()
         game.move(direction)
         self.memory.push(ohe_board,suggest)
-        print(game.score)
+        # print(game.score)
 
     def train(self,batch):
         if self.memory.ready(batch):
@@ -114,10 +114,10 @@ def train(self, begin_score, end_score):
     else:
 	    self.model = self.build()
 
-if os.path.exists("model.h5"):
-    model = load_model("model.h5")
-else:
-    model = My_Model()
+# if os.path.exists("model.h5"):
+model = load_model("model.h5")
+# else:
+#     model = My_Model()
 task = ModelWrapper(model, 2**16)
 batch = 2048
 count = 0
@@ -127,6 +127,7 @@ while True:
     count += 1
     while not game.end:
         task.move(game)
+    print(game.score)
     task.train(batch = batch)
 
     if count % 10 == 0:
