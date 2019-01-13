@@ -6,8 +6,8 @@ A 2048 game api for training supervised learning (imitation learning) or reinfor
 * 输出分数：运行evaluate.py文件
 * 我的Agent：game2048/agent.py文件中的类MyOwnAgent
 * 最终用于提交的模型：new_model.h5
-* 其他中间过程的模型在test_models里面，后缀为当时的时间
-* EE369
+* 其他中间过程的模型在test_models里面，后缀为当时的时间，有些被我删掉了
+* EE369_fingerprint.json是本代码的指纹文件
 
 # Code structure
 * [`game2048/`](game2048/): the main package.
