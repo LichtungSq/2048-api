@@ -11,7 +11,7 @@ class Agent:
     '''Agent Base.'''
 
     def __init__(self, game, display=None):
-        #display = Display()
+        # display = Display()
         self.game = game
         self.display = display
 
