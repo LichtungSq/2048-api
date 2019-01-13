@@ -37,11 +37,11 @@ if __name__ == "__main__":
     game = Game(size=GAME_SIZE, score_to_win=SCORE_TO_WIN)
 
     try:
-        from game2048.agents import ExpectiMaxAgent
-        agent = ExpectiMaxAgent(game=game)
+        from game2048.agents import MyOwnAgent
+        agent = MyOwnAgent(game=game)
     except:
         from game2048.agents import RandomAgent
-        print("WARNING: Please compile the ExpectiMaxAgent first following the README.")
+        print("WARNING: Please compile the MyOwnAgent first following the README.")
         print("WARNING: You are now using a RandomAgent.")
         agent = RandomAgent(game=game)
 
