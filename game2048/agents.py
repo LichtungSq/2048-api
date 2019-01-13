@@ -70,7 +70,7 @@ class MyOwnAgent(Agent):
     
     def __init__(self, game,display = None):
         super(MyOwnAgent, self).__init__(game, display)
-        self.model = load_model("./test_new_model_1754.h5")
+        self.model = load_model("./new_model.h5")
 
     def step(self):
         board = np.array([grid_ohe(self.game.board)])

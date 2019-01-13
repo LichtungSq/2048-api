@@ -2,6 +2,7 @@ from game2048.game import Game
 from game2048.displays import Display
 import os
 os.environ["CUDA_VISIBLE_DEVICES"]="1"
+# import timer
 
 def single_run(size, score_to_win, AgentClass, **kwargs):
     game = Game(size, score_to_win)
@@ -24,5 +25,6 @@ if __name__ == '__main__':
         score = single_run(GAME_SIZE, SCORE_TO_WIN, AgentClass=TestAgent)
         scores.append(score)
         print i
+        # print timer
 
     print("Average scores: @%s times" % N_TESTS, sum(scores) / len(scores))

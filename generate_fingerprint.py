@@ -3,7 +3,7 @@ import numpy as np
 from game2048.game import Game
 # from game2048.displays import Display
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 
 def generate_fingerprint(AgentClass, **kwargs):
