@@ -1,6 +1,14 @@
 # 2048-api
 A 2048 game api for training supervised learning (imitation learning) or reinforcement learning agents
 
+# How to run (for TA Jiancheng)
+* 训练模型：运行new_model_train.py文件
+* 输出分数：运行evaluate.py文件
+* 我的Agent：game2048/agent.py文件中的类MyOwnAgent
+* 最终用于提交的模型：new_model.h5
+* 其他中间过程的模型在test_models里面，后缀为当时的时间
+* EE369
+
 # Code structure
 * [`game2048/`](game2048/): the main package.
     * [`game.py`](game2048/game.py): the core 2048 `Game` class.
